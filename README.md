@@ -38,4 +38,4 @@ streamlit run streamlit_ui.py
 ```
 
 This will launch a local server where you can try filtering books based on rating, genres, language, and more.
-This is just a basic PoC — feel free to adapt and build on top of it!
+This is just a basic PoC!
