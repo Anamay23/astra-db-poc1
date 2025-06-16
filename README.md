@@ -17,8 +17,8 @@ This project is a simple proof-of-concept exploring how to use [DataStax Astra D
 | `quickstart_connect.py`   | Connects to Astra DB using environment variables                        |
 | `quickstart_create_connection.py` | (Optional) Separate version to manage connection setup             |
 | `quickstart_insert_into_collection.py` | Inserts sample documents into the Astra DB collection           |
-| `quickstart_find.py`      | Basic script to run a few sample queries                                |
-| `find2.py`                | Extended search script with vector search, filters, and projections     |
+| `extra_files/quickstart_find.py`      | Basic script to run a few sample queries                                |
+| `extra_files/find2.py`                | Extended search script with vector search, filters, and projections     |
 | `streamlit_ui.py`         | Interactive web UI to filter and search books using Streamlit           |
 | `sample_dataset.json`     | Sample book data used for populating the collection                     |
 | `.env`                    | Contains API credentials (excluded from GitHub using `.gitignore`)      |
