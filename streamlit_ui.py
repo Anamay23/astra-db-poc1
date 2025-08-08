@@ -21,13 +21,22 @@ for doc in all_documents:
 
 all_genres = sorted(genre_set)
 
-# Display genres as buttons
+# Display genres as buttons using session state
 st.markdown("### Filter by Genre")
+
+# Initialize session state for selected_genre
+if "selected_genres" not in st.session_state:
+    st.session_state.selected_genres = set()
+
+# Button layout
 cols = st.columns(4)
-selected_genre = None
 for i, genre in enumerate(all_genres):
-    if cols[i % 4].button(genre):
-        selected_genre = genre
+    key = f"genre_{genre}"
+    checked = genre in st.session_state.selected_genres
+    if cols[i % 4].checkbox(genre, value=checked, key=key):
+        st.session_state.selected_genres.add(genre)
+    else:
+        st.session_state.selected_genres.discard(genre)
 
 # Search logic
 query = {
@@ -35,9 +44,11 @@ query = {
     "number_of_pages": {"$gte": min_pages},
 }
 if language:
-    query["metadata.language"] = language
-if selected_genre:
-    query["genres"] = selected_genre
+    language_list = [lang.strip() for lang in language.split(",") if lang.strip()]
+    if language_list:
+        query["metadata.language"] = {"$in": language_list}
+if st.session_state.selected_genres:
+    query["genres"] = {"$in": list(st.session_state.selected_genres)}
 
 st.markdown("### Search and Results")
 if st.button("Search"):
@@ -48,8 +59,11 @@ if st.button("Search"):
             for op, v in value.items():
                 if op == "$gte":
                     st.write(f"**{key} ≥ {v}**")
+                elif op == "$in":
+                    st.write(f"**{key} in {', '.join(v)}**")
         else:
             st.write(f"**{key} = {value}**")
+
 
     # Fetch and display results
     results = collection.find(query, limit=10, sort={"rating": -1})
