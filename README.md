@@ -26,13 +26,37 @@ This project is a simple proof-of-concept exploring how to use [DataStax Astra D
 ## 🛠️ Requirements
 
 - Python 3.8+
-- Install dependencies using:
+- Recommended: Use a virtual environment to avoid conflicts
 
+## 🧪 Setup Instructions
+
+### 1. Clone the Repository
 ```bash
-pip install astrapy streamlit python-dotenv
+git clone https://github.com/Anamay23/astra-db-poc1.git
+cd astra-db-poc1
 ```
-### Run the Streamlit app
 
+### Create virtual environment named 'venv'
+```bash
+python -m venv venv
+```
+
+### Activate the virtual environment
+```bash
+venv\Scripts\activate
+```
+
+### Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### Add environment variables
+#### Create a .env file in the root directory and include your Astra DB credentials like:
+API_ENDPOINT=....
+APPLICATION_TOKEN=....
+
+### Run Streamlit app
 ```bash
 streamlit run streamlit_ui.py
 ```
